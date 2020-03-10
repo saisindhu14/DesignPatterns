@@ -1,14 +1,67 @@
 package Com.Epam.DesignPatterns;
 
 public class SingleTon {
-private static SingleTon object;
-	private SingleTon() {
-		
+	private static SingleTon instance = new SingleTon(); 
+	  
+	  private SingleTon(){}
+	  
+	  public static SingleTon getInstance() {
+	    return instance;
+	  }
 	}
-	public static SingleTon getInstance() {
-		if(object == null) {
-			object = new SingleTon();
-		}
-		return object;
+
+	class Singleton {
+	  private static Singleton instance; 
+	  
+	  private Singleton(){}
+	  
+	  public static Singleton getInstance() {
+	    if(instance == null) {
+	      instance = new Singleton();
+	    }
+	    
+	    return instance;
+	  }
 	}
-}
+
+	class SingletonSynchronizedMethod {
+	  private static SingletonSynchronizedMethod instance; 
+	  
+	  private SingletonSynchronizedMethod(){}
+	  
+	  public static synchronized SingletonSynchronizedMethod getInstance() {
+	    if(instance == null) {
+	      instance = new SingletonSynchronizedMethod();
+	    }
+	    return instance;
+	  }
+	}
+
+	class SingletonSynchronized {
+	  private static SingletonSynchronized instance; 
+	  
+	  private SingletonSynchronized(){}
+	  
+	  public static SingletonSynchronized getInstance() {
+	    if(instance == null) {
+	      synchronized (SingletonSynchronized.class) {
+	        if(instance == null) {
+	          instance = new SingletonSynchronized();
+	        }
+	      }
+	    }
+	    return instance;
+	  }
+	}
+
+public class SingletonExample {
+	  public static void main(String[] args) {
+	    SingletonSynchronized instance = SingletonSynchronized.getInstance();
+	    
+	    System.out.println(instance);
+	    
+	    SingletonSynchronized instance1 = SingletonSynchronized.getInstance();
+	    
+	    System.out.println(instance1);
+	  }
+	}
